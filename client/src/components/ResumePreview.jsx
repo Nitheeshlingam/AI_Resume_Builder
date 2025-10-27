@@ -11,7 +11,7 @@ const ResumePreview = ({data, template, accentColor, classes = ""}) => {
                 return <ModernTemplate data={data} accentColor={accentColor} />
             case "minimal":
                 return <MinimalTemplate data={data} accentColor={accentColor} />
-            case "Minimal-image":
+            case "minimal-image":
                 return <MinimalImageTemplate data={data} accentColor={accentColor} />
             default:
                 return <ClassicTemplate data={data} accentColor={accentColor} />

@@ -1,14 +1,14 @@
-import { Trash2 } from 'lucide-react';
+import { Trash2, Plus } from 'lucide-react';
 import React from 'react'
 
-const ProjectForm = () => {
+const ProjectForm = ({data, onChange}) => {
     const addProject = () => {
         const newProject = {
             name: "",
             type: "",
             description: ""
         };
-        onChange([...data, newExperience]);
+        onChange([...data, newProject]);
     }
 
     const removeProject = (index) => {
@@ -31,7 +31,7 @@ const ProjectForm = () => {
                     <p className='text-sm text-gray-500'>Add Your Projects
                     </p>
                 </div>
-                <button onClick={addEducation} className='flex items-center gap-2 px-3 py-1 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors'>
+                <button onClick={addProject} className='flex items-center gap-2 px-3 py-1 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors'>
                     <Plus className='size-4' />
                     Add Project
                 </button>
@@ -46,8 +46,8 @@ const ProjectForm = () => {
                                 <Trash2 className="size-4" />
                             </button>
                         </div>
-                        <div className='grid md:grid-cols-2 gap-3'>
-                            <input value={project.name || ""} onChange={(e) => updateEducation(index, "name", e.target.value)} type="text" placeholder='Project Name' className='px-3 py-2 text-sm rounded-lg' />
+                        <div className='grid gap-3'>
+                            <input value={project.name || ""} onChange={(e) => upadateProject(index, "name", e.target.value)} type="text" placeholder='Project Name' className='px-3 py-2 text-sm rounded-lg' />
 
                             <input value={project.type || ""} onChange={(e) => upadateProject(index, "name", e.target.value)} type="text" placeholder='Project Type' className='px-3 py-2 text-sm rounded-lg' />
 
