@@ -1,22 +1,22 @@
 import { Trash2, Plus } from 'lucide-react';
 import React from 'react'
 
-const ProjectForm = ({data, onChange}) => {
-    const addProject = () => {
-        const newProject = {
+const projectsForm = ({data, onChange}) => {
+    const addprojects = () => {
+        const newprojects = {
             name: "",
             type: "",
             description: ""
         };
-        onChange([...data, newProject]);
+        onChange([...data, newprojects]);
     }
 
-    const removeProject = (index) => {
+    const removeprojects = (index) => {
         const updated = data.filter((_, i) => i !== index);
         onChange(updated);
     }
 
-    const upadateProject = (index, field, value) => {
+    const upadateprojects = (index, field, value) => {
         const updated = [...data];
         updated[index] = { ...updated[index], [field]: value };
         onChange(updated);
@@ -26,32 +26,32 @@ const ProjectForm = ({data, onChange}) => {
             <div className='flex items-center justify-between'>
                 <div>
                     <h3 className='flex items-center gap-2 text-lg font-semibold text-gray-900'>
-                        Projects
+                        projects
                     </h3>
-                    <p className='text-sm text-gray-500'>Add Your Projects
+                    <p className='text-sm text-gray-500'>Add Your projects
                     </p>
                 </div>
-                <button onClick={addProject} className='flex items-center gap-2 px-3 py-1 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors'>
+                <button onClick={addprojects} className='flex items-center gap-2 px-3 py-1 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors'>
                     <Plus className='size-4' />
-                    Add Project
+                    Add projects
                 </button>
             </div>
 
             <div className='space-y-4 mt-6'>
-                {data.map((project, index) => (
+                {data.map((projects, index) => (
                     <div key={index} className='p-4 border border-gray-200 rounded-lg space-y-3'>
                         <div className='flex justify-between items-start'>
-                            <h4>Project #{index + 1}</h4>
-                            <button onClick={() => removeProject(index)} className='text-red-500 hover:text-red-700 transition-colors'>
+                            <h4>projects #{index + 1}</h4>
+                            <button onClick={() => removeprojects(index)} className='text-red-500 hover:text-red-700 transition-colors'>
                                 <Trash2 className="size-4" />
                             </button>
                         </div>
                         <div className='grid gap-3'>
-                            <input value={project.name || ""} onChange={(e) => upadateProject(index, "name", e.target.value)} type="text" placeholder='Project Name' className='px-3 py-2 text-sm rounded-lg' />
+                            <input value={projects.name || ""} onChange={(e) => upadateprojects(index, "name", e.target.value)} type="text" placeholder='projects Name' className='px-3 py-2 text-sm rounded-lg' />
 
-                            <input value={project.type || ""} onChange={(e) => upadateProject(index, "name", e.target.value)} type="text" placeholder='Project Type' className='px-3 py-2 text-sm rounded-lg' />
+                            <input value={projects.type || ""} onChange={(e) => upadateprojects(index, "type", e.target.value)} type="text" placeholder='projects Type' className='px-3 py-2 text-sm rounded-lg' />
 
-                            <textarea rows={4} value={project.description || ""} onChange={(e) => upadateProject(index, "description", e.target.value)} type="text" placeholder='Describe your project... ' className='px-3 py-2 text-sm rounded-lg resize-none' />
+                            <textarea rows={4} value={projects.description || ""} onChange={(e) => upadateprojects(index, "description", e.target.value)} type="text" placeholder='Describe your projects... ' className='px-3 py-2 text-sm rounded-lg resize-none' />
                         </div>
                     </div>
                 ))}
@@ -61,4 +61,4 @@ const ProjectForm = ({data, onChange}) => {
     )
 }
 
-export default ProjectForm
+export default projectsForm

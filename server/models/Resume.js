@@ -28,10 +28,10 @@ const ResumeSchema = new mongoose.Schema({
             is_current: {type: Boolean}
         }
     ],
-    project: [
+    projects: [
         {
             name: {type: String},
-            type: {typ: String},
+            type: {type: String},
             description: {type: String},
         }
     ],

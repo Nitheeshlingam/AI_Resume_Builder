@@ -11,7 +11,7 @@ const EducationForm = ({data, onChange}) => {
             graduation_date: "",
             gpa: false,
         };
-        onChange([...data , newExperience]);
+        onChange([...data , newEducation]);
     }
 
     const removeEducation = (index) => {

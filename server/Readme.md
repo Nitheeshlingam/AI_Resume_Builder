@@ -6,5 +6,7 @@ npm install express dotenv cors bcrypt jsonwebtoken mongoose multer nodemon
 connect with mongodb by creating a clusted and copy the url
 use imageKit for image storage and optimization
 npm install @imagekit/nodejs
+npm install openai for accessing gemini ai model
+
 
 

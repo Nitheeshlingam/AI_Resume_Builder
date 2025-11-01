@@ -7,7 +7,7 @@ const TemplateSelector = ({ selectedTemplate, onChange }) => {
         { id: 'classic', name: 'Classic', preview: 'A clean traditional resume format with clear sections and professional typography.' },
         { id: 'modern', name: 'Modern', preview: 'A sleek and contemporary design with bold headings and a focus on readability.' },
         { id: 'minimal', name: 'Minimal', preview: 'A simple and elegant layout with ample white space and understated design elements.' },
-        { id: 'Minimal-image', name: 'Minimal Image', preview: 'A minimalist design that incorporates a profile image for a personal touch while maintaining simplicity.' },
+        { id: 'minimal-image', name: 'Minimal Image', preview: 'A minimalist design that incorporates a profile image for a personal touch while maintaining simplicity.' },
     ];
     return (
         <div className='relative'>

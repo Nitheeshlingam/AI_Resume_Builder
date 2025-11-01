@@ -26,6 +26,10 @@ Use Outfit google font and add import it in the index.css at top
 sample for import a component
 import Dashboard from './pages/Dashboard';
 
-
+Add Redux to the project for managing data flow
+npm install react-redux @reduxjs/toolkit
+use axios - for api call
+use react-pdftotext to extract the data from resume
+use npm install react-hot-toast to add toast messages
 
  
