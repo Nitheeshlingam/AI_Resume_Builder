@@ -2,10 +2,10 @@ import express from "express";
 import serverless from "serverless-http";
 import cors from "cors";
 import "../../server/configs/db.js";
-import connectDB from "../configs/db.jsnfigs/db.js";
-import userRouter from "../routes/userRoutes.jserRoutes.js";
-import resumeRouter from "../routes/resumeRoutes.jsmeRoutes.js";
-import aiRouter from "../routes/aiRoutes.jsaiRoutes.js";
+import connectDB from "../configs/db.js";
+import userRouter from "../routes/userRoutes.js";
+import resumeRouter from "../routes/resumeRoutes.js";
+import aiRouter from "../routes/aiRoutes.js";
 
 // Connect DB
 await connectDB();
