@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import serverless from "serverless-http";
 import "dotenv/config.js";
-import connectDB from "../configs/db.js";
-import userRouter from "../routes/userRoutes.js";
-import resumeRouter from "../routes/resumeRoutes.js";
-import aiRouter from "../routes/aiRoutes.js";
+import connectDB from "./configs/db.js";
+import userRouter from "./routes/userRoutes.js";
+import resumeRouter from "./routes/resumeRoutes.js";
+import aiRouter from "./routes/aiRoutes.js";
 
 const app = express();
 
