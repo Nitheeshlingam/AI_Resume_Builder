@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
+let isConnected = false;
+
 const connectDB = async () => {
+  if (isConnected) return;
+
   try {
     let mongodbURI = process.env.MONGODB_URI;
     const projectName = "resume-builder";
@@ -11,7 +15,9 @@ const connectDB = async () => {
       mongodbURI = mongodbURI.slice(0, -1);
     }
 
-    await mongoose.connect(`${mongodbURI}/${projectName}`);
+    const db = await mongoose.connect(`${mongodbURI}/${projectName}`);
+    isConnected = db.connections[0].readyState === 1;
+
     console.log("MongoDB Connected ✔️");
   } catch (error) {
     console.error("MongoDB Error:", error.message);
