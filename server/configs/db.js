@@ -1,47 +1,25 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-  throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env'
-  );
-}
-
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function connectDB() {
-  if (cached.conn) {
-    return cached.conn;
-  }
-
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-
+const connectDB = async () => {
   try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
+    mongoose.connection.on("connected", () => {
+      console.log("Database Connected Successfully");
+    });
 
-  return cached.conn;
-}
+    let mongodbURI = process.env.MONGODB_URI;
+    const projectName = "resume-builder";
+    if (!mongodbURI) {
+      throw new Error("MONGODB_URI environment variable not set");
+    }
+
+    if (mongodbURI.endsWith("/")) {
+      mongodbURI = mongodbURI.slice(0, -1);
+    }
+
+    await mongoose.connect(`${mongodbURI}/${projectName}`);
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+  }
+};
 
 export default connectDB;
