@@ -1,61 +1,32 @@
 import express from "express";
 import serverless from "serverless-http";
 import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+
+// Only load dotenv in development
+if (process.env.NODE_ENV !== "production") {
+  const dotenv = await import("dotenv");
+  dotenv.config();
+}
+
+import connectDB from "./configs/db.js";
 import userRouter from "./routes/userRoutes.js";
 import resumeRouter from "./routes/resumeRoutes.js";
 import aiRouter from "./routes/aiRoutes.js";
 
 const app = express();
-dotenv.config();
 
-app.use(express.json({ limit: "10mb", extended: true }));
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
-app.use(cors({ 
-  origin: ["https://sparcv-client.vercel.app", "http://localhost:3000"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
-}));
+// CORS configuration
+app.use(
+  cors({
+    origin: ["https://sparcv-client.vercel.app", "http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
 
-// Database connection setup
-const MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env');
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function connectDB() {
-  if (cached.conn) {
-    return cached.conn;
-  }
-
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-
-  try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
-
-  return cached.conn;
-}
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Database connection middleware
 let dbConnection = null;
@@ -75,18 +46,18 @@ app.use(async (req, res, next) => {
 
 // Routes
 app.get("/", (req, res) => {
-  res.json({ 
+  res.json({
     message: "SparkCV Backend is running!",
     status: "success",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
 app.get("/api", (req, res) => {
-  res.json({ 
+  res.json({
     message: "API is healthy",
     status: "success",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
