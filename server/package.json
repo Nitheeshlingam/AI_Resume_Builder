@@ -4,8 +4,9 @@
   "description": "initialize backend npm init -y",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node api/index.js",
+    "server": "nodemon api/index.js",
+    "vercel-build": "echo 'Building for Vercel'"
   },
   "keywords": [],
   "author": "",
