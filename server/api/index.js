@@ -8,7 +8,7 @@ import aiRouter from "../routes/aiRoutes.js";
 
 const app = express();
 
-/* ✅ Connect DB (Vercel-safe) */
+/* DB connection (safe for serverless) */
 let isConnected = false;
 async function initDB() {
   if (!isConnected) {
@@ -18,21 +18,22 @@ async function initDB() {
 }
 initDB();
 
-/* ✅ CORS (STRICT & CORRECT) */
-app.use(cors({
-  origin: "https://sparcv-client.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-}));
-
-/* ✅ Handle preflight */
-app.options("*", cors());
+/* ✅ CORS — NO app.options("*") */
+app.use(
+  cors({
+    origin: "https://sparcv-client.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
-/* ✅ Routes */
-app.get("/", (req, res) => res.send("Server is live..."));
+app.get("/", (req, res) => {
+  res.send("Server is live...");
+});
+
 app.use("/api/users", userRouter);
 app.use("/api/resumes", resumeRouter);
 app.use("/api/ai", aiRouter);
