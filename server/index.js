@@ -20,7 +20,3 @@ app.use('/api/users', userRouter)
 app.use('/api/resumes', resumeRouter)
 app.use('/api/ai', aiRouter)
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on port ${PORT}`);
-
-})
