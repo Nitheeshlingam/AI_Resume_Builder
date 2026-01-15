@@ -8,17 +8,17 @@ import aiRouter from "../routes/aiRoutes.js";
 
 const app = express();
 
-/* DB connection (safe for serverless) */
-let isConnected = false;
+/* DB init for serverless */
+let connected = false;
 async function initDB() {
-  if (!isConnected) {
+  if (!connected) {
     await connectDB();
-    isConnected = true;
+    connected = true;
   }
 }
 initDB();
 
-/* ✅ CORS — NO app.options("*") */
+/* CORS */
 app.use(
   cors({
     origin: "https://sparcv-client.vercel.app",
